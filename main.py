@@ -2,6 +2,7 @@ import prompt_toolkit
 import argparse
 import yaml
 import sys
+import os
 from prompt_toolkit import print_formatted_text
 from prompt_toolkit.formatted_text import FormattedText
 from abc import ABC, abstractmethod
@@ -17,13 +18,25 @@ class Conversation():
         self.actor = actor
         self.text = text
 
+    def as_dict(self):
+        return {
+            'actor': self.actor,
+            'text': self.text
+        }
+
 class DialogContext():
     context: str
     conversations: List[Conversation]
 
-    def __init__(self, context: str, conversations: List[Conversation]):
+    def __init__(self, context: str, conversations: List[Conversation] = []):
         self.context = context
         self.conversations = [Conversation(**x) for x in conversations]
+
+    def as_dict(self):
+        return {
+            'context': self.context,
+            'conversations': [x.as_dict() for x in self.conversations]
+        }
 
 class Actor(ABC):
     name: str
@@ -45,12 +58,23 @@ class HumanActor(Actor):
         return psess.prompt(self.name + ": ")
 
 class AIActor(Actor):
-    max_response_length = 100
+    max_response_length: int
+    max_conversation_in_context: int
     generate_args: Dict
 
-    def __init__(self, name: str, model_name: str, generate_args = {}):
+    def __init__(
+            self,
+            name: str,
+            model_name: str,
+            max_response_length = 100,
+            max_conversation_in_context = 10,
+            generate_args = {}
+    ):
         super(AIActor, self).__init__(name)
         from transformers import AutoTokenizer
+
+        self.max_response_length = max_response_length
+        self.max_conversation_in_context = max_conversation_in_context
 
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.newline = "\n"
@@ -58,14 +82,13 @@ class AIActor(Actor):
         #eos_token_id = 198
 
         self.generate_args = {
-            "num_beams": 5,
             "repetition_penalty": 1.05,
             **generate_args,
         }
 
     def generate_text_for_generation(self, context: DialogContext):
         text = context.context + self.newline
-        for conversation in context.conversations:
+        for conversation in context.conversations[-self.max_conversation_in_context:]:
             text = text + conversation.actor + ": " + conversation.text + self.newline
         return text + self.name + ": "
 
@@ -113,13 +136,27 @@ class MaskedLMActor(AIActor):
 class DialogController:
 
     state: DialogContext
+    session_file: str
+    config: Dict
     actors: List[Actor]
     current_actor_idx = -1
 
-    def __init__(self, state: Dict, actors: List[Dict]):
-        self.state = DialogContext(**state)
+    def __init__(self, config_file: str, session_file: str):
+        self.session_file = session_file
+        with open(config_file) as f:
+            config = yaml.load(f, Loader=yaml.CLoader)
 
-        self.actors = [self.load_actor(x) for x in actors]
+        self.state = DialogContext(**config['state'])
+        if os.path.exists(session_file):
+            print("Session file found. Resuming session.")
+            with open(session_file) as f:
+                state = yaml.load(f, Loader=yaml.CLoader)
+                self.state = DialogContext(**state)
+
+        self.actors = [self.load_actor(x) for x in config['actors']]
+
+        if len(self.state.conversations) > 0:
+            self.current_actor_idx = [x.name for x in self.actors].index(self.state.conversations[-1].actor)
 
     def load_actor(self, actor_config: Dict):
         type = actor_config.pop("type")
@@ -132,6 +169,10 @@ class DialogController:
             return MaskedLMActor(**actor_config)
         else:
             raise Exception("Unknown actor type " + type)
+
+    def save_session(self):
+        with open(self.session_file, 'w') as f:
+            yaml.safe_dump(self.state.as_dict(), f)
 
     def run(self):
         print()
@@ -153,9 +194,16 @@ class DialogController:
                 ("#cccccc", text),
             ]))
 
-def load_from_yaml(filename: str):
-    res = yaml.load(open(filename), Loader=yaml.CLoader)
-    return DialogController(**res)
+            self.save_session()
+
+def load_from_yaml(file: str):
+    basename = os.path.basename(file)
+    session_file = file
+    dir = os.path.dirname(file)
+    if not os.path.splitext(basename)[0].endswith('.session'):
+        session_file = os.path.join(dir, os.path.splitext(basename)[0] + '.session.yaml')
+
+    return DialogController(file, session_file)
 
 parser = argparse.ArgumentParser(description='Run a conversation between you and an AI')
 parser.add_argument('scenario', type=str,

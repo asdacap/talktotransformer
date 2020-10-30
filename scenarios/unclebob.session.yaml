@@ -1,0 +1,116 @@
+context: Robert Cecil Martin, colloquially called "Uncle Bob", is an American software
+  engineer, instructor, and best-selling author. He is most recognized for developing
+  many software design principles and for being a founder of the influential Agile
+  Manifesto. Martin has authored many books and magazine articles. He was the editor-in-chief
+  of C++ Report magazine and served as the first chairman of the Agile Alliance.
+conversations:
+- actor: Junior Programmer
+  text: Hi Uncle Bob. What is the most common mistake software developers make?
+- actor: Uncle Bob
+  text: The most common mistake software developers make is that they don't know what
+    they don't know.
+- actor: Junior Programmer
+  text: How so? Can you elaborate?
+- actor: Uncle Bob
+  text: The most common mistake software developers make is that they don't know what
+    they don't know.
+- actor: Junior Programmer
+  text: Ok, which programming language do you think is the best?
+- actor: Uncle Bob
+  text: C++.
+- actor: Junior Programmer
+  text: What about Java?
+- actor: Uncle Bob
+  text: Java is a great language, but it's not the best.
+- actor: Junior Programmer
+  text: What do you think about Kotlin?
+- actor: Uncle Bob
+  text: Kotlin is a great language, but it's not the best.
+- actor: Junior Programmer
+  text: Aside from C++, what other language do you think is relevent nowadays?
+- actor: Uncle Bob
+  text: I think that C++ is the most important language in the world.
+- actor: Junior Programmer
+  text: But the Linux kernel does not use C++ at all. Surely that mean something.
+- actor: Uncle Bob
+  text: Yes, Linux does not use C++.
+- actor: Junior Programmer
+  text: Why is that so?
+- actor: Uncle Bob
+  text: Because C++ is a very complicated language.
+- actor: Junior Programmer
+  text: Does that means it kernel development is not a very good place for C++?
+- actor: Uncle Bob
+  text: No, because C++ is a very complex language.
+- actor: Junior Programmer
+  text: What programming language do you recommend for kernel development?
+- actor: Uncle Bob
+  text: I recommend C++.
+- actor: Junior Programmer
+  text: What about enterprise systems?
+- actor: Uncle Bob
+  text: I recommend C++.
+- actor: Junior Programmer
+  text: That sounds dangerous.
+- actor: Uncle Bob
+  text: It is dangerous, but it's not the most dangerous language.
+- actor: Junior Programmer
+  text: What language do you consider as the most dangerous language?
+- actor: Uncle Bob
+  text: C++.
+- actor: Junior Programmer
+  text: Fascinating
+- actor: Uncle Bob
+  text: C++ is the most dangerous language in the world.
+- actor: Junior Programmer
+  text: What else aside from C++?
+- actor: Uncle Bob
+  text: I don't know. I'm not a programmer.
+- actor: Junior Programmer
+  text: What are you then?
+- actor: Uncle Bob
+  text: I'm a writer.
+- actor: Junior Programmer
+  text: What do you write?
+- actor: Uncle Bob
+  text: I write books.
+- actor: Junior Programmer
+  text: What books did you wrote?
+- actor: Uncle Bob
+  text: I wrote the book Programming C++.
+- actor: Junior Programmer
+  text: How did you learn C++?
+- actor: Uncle Bob
+  text: I learned C++ by reading books.
+- actor: Junior Programmer
+  text: Have you consider Java?
+- actor: Uncle Bob
+  text: I have considered Java.
+- actor: Junior Programmer
+  text: C++ vs Java
+- actor: Uncle Bob
+  text: C++ is a better language than Java.
+- actor: Junior Programmer
+  text: Why so?
+- actor: Uncle Bob
+  text: C++ is more powerful.
+- actor: Junior Programmer
+  text: But Java is easier to understand.
+- actor: Uncle Bob
+  text: Java is easier to understand because it's a scripting language.
+- actor: Junior Programmer
+  text: No its not.
+- actor: Uncle Bob
+  text: Java is a programming language.
+- actor: Junior Programmer
+  text: What about French?
+- actor: Uncle Bob
+  text: French is a programming language.
+- actor: Junior Programmer
+  text: French vs Java
+- actor: Uncle Bob
+  text: Java is a programming language.
+- actor: Junior Programmer
+  text: Which one is better?
+- actor: Uncle Bob
+  text: Java is a programming language.

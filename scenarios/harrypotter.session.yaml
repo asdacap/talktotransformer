@@ -1,0 +1,47 @@
+context: Harry Potter is a series of seven fantasy novels written by British author
+  J. K. Rowling. The novels chronicle the lives of a young wizard, Harry Potter, and
+  his friends Hermione Granger and Ron Weasley, all of whom are students at Hogwarts
+  School of Witchcraft and Wizardry. The main story arc concerns Harry's struggle
+  against Lord Voldemort, a dark wizard who intends to become immortal, overthrow
+  the wizard governing body known as the Ministry of Magic and subjugate all wizards
+  and Muggles (non-magical people). This is the dialog between Harry and Ron after
+  the event.
+conversations:
+- actor: Harry Potter
+  text: Hi Ron
+- actor: Ron Weasley
+  text: Hi Potter
+- actor: Harry Potter
+  text: How are you?
+- actor: Ron Weasley
+  text: Good. How is Professor Snape?
+- actor: Harry Potter
+  text: He's fine.
+- actor: Ron Weasley
+  text: I thought he is dead.
+- actor: Harry Potter
+  text: He's not dead.
+- actor: Ron Weasley
+  text: Ah, that is great. What about Professor Dumbledore?
+- actor: Harry Potter
+  text: He's fine.
+- actor: Ron Weasley
+  text: How is Lord Voldemort?
+- actor: Harry Potter
+  text: He's dead.
+- actor: Ron Weasley
+  text: Who killed him?
+- actor: Harry Potter
+  text: Lord Voldemort.
+- actor: Ron Weasley
+  text: Who killed Lord Voldemort?
+- actor: Harry Potter
+  text: Lord Voldemort.
+- actor: Ron Weasley
+  text: Hi killed himself?
+- actor: Harry Potter
+  text: Yes.
+- actor: Ron Weasley
+  text: He does not look very depressed.
+- actor: Harry Potter
+  text: Yes.
